@@ -1,0 +1,31 @@
+$m-width: 300px;
+$bg: #505050;
+$shadowColor: #d4d4d4;
+
+@mixin gridGap8 {
+  display: grid;
+  grid-gap: 0.5rem;
+}
+
+.counter {
+  @include gridGap8;
+  max-width: $m-width;
+  width: 100%;
+  margin: 10px auto;
+
+  background: #505050;
+  padding: 15px 10px;
+  border-radius: 10px;
+  box-shadow: 6px 8px 10px $shadowColor;
+
+  &__title {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  &__panel {
+    @include gridGap8;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

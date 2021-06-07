@@ -1,0 +1,1 @@
+import { default as Counter } from "./Counter";
