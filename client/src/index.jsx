@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+import { hydrate } from "react-dom";
 
 import "./styles/commons.scss";
 import { MainLayout } from "./layouts";
@@ -11,4 +11,6 @@ const App = () => (
     </MainLayout>
 );
 
-render(<App/>, document.getElementById("reactApp"))
+hydrate(<App/>, document.getElementById("reactApp"))
+
+export default App;

@@ -87,14 +87,14 @@ const plugins = () => {
 }
 
 module.exports = {
-    context: path.resolve(__dirname, "src"),
+    context: path.resolve(__dirname, "client/src"),
     mode: "development",
     entry: {
         main: ["@babel/polyfill", "./index.jsx"]
     },
     output: {
         filename: filename("js"),
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "client/dist")
     },
     resolve: {
         extensions: [".js", ".json", ".jsx"]
@@ -140,5 +140,5 @@ module.exports = {
         hot: isDev
     },
     optimization: optimization(),
-    devtool: isDev ? "source-map" : ""
+    devtool: isDev ? "source-map" : undefined
 }

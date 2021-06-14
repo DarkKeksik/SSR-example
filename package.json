@@ -5,10 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "prod": "cross-env NODE_ENV=production webpack --mode production",
-    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open"
+    "client-dev": "cross-env NODE_ENV=development webpack --mode development",
+    "client-prod": "cross-env NODE_ENV=production webpack --mode production",
+    "client-watch": "cross-env NODE_ENV=development webpack --mode development --watch",
+    "ssr": "node ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
+    "express": "^4.17.1",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
