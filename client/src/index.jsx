@@ -12,5 +12,3 @@ const App = () => (
 );
 
 hydrate(<App/>, document.getElementById("reactApp"))
-
-export default App;
