@@ -1,26 +1,26 @@
 const path = require("path");
-const isDev = process.env.NODE_ENV === "development";
 
 // Useful functions
-const optimization = require('../common').optimization;
-const filename = require('../common/index.js').filename;
-const cssLoaders = require('../common/index.js').cssLoaders;
-const babelLoader = require('../common/index.js').babelLoader;
-const plugins = require('../common/index.js').plugins;
 const getPathForContext = require('../common/index.js').getPathForContext;
 const getPathForOutput = require('../common/index.js').getPathForOutput;
+const babelLoader = require('../common/index.js').babelLoader;
+const cssLoaders = require('../common/index.js').cssLoaders;
+const plugins = require('../common/index.js').plugins;
 
 
 module.exports = {
-    target: 'web',
-    context: path.resolve(__dirname, getPathForContext() ),
+    target: 'node',
+    node: {
+        __dirname: true
+    },
+    context: path.resolve( __dirname, getPathForContext(false) ),
     mode: "development",
     entry: {
-        main: ["@babel/polyfill", "./index.jsx"]
+        server: ["@babel/polyfill", "./server.js"]
     },
     output: {
-        filename: filename("js"),
-        path: path.resolve(__dirname, getPathForOutput() )
+        filename: 'server.js',
+        path: path.resolve(__dirname, getPathForOutput(false ) )
     },
     resolve: {
         extensions: [".js", ".json", ".jsx"]
@@ -60,11 +60,5 @@ module.exports = {
             }
         ]
     },
-    plugins: plugins(),
-    devServer: {
-        port: 8080,
-        hot: isDev
-    },
-    optimization: optimization(),
-    devtool: isDev ? "source-map" : undefined
+    plugins: plugins( false )
 }

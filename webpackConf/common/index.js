@@ -65,32 +65,34 @@ const babelLoader = preset => {
     return config;
 }
 
-const plugins = () => {
+const plugins = ( isClientBuild = true ) => {
     const base = [
-        new HTMLWebpackPlugin({
-            template: "./index.html",
-            minify: {
-                collapseWhitespace: isProd
-            }
-        }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: filename("css")
         })
     ];
 
-    if (isProd) {
-        base.push( new BundleAnalyzerPlugin() );
-    }
+    isProd && base.push( new BundleAnalyzerPlugin() );
+    isClientBuild && base.push(
+        new HTMLWebpackPlugin({
+            template: "./index.html",
+            minify: {
+                collapseWhitespace: isProd
+            }
+        })
+    )
 
     return base;
 }
 
-const getPathForWebpack = (
-    nameFolder = 'src',
+const getPathForContext = (
     buildForClient = true
-) => buildForClient ? `../../client/${ nameFolder }` :  `../../server/${ nameFolder }`;
+) => buildForClient ? '../../client/src' :  '../../server';
 
+const getPathForOutput = (
+    buildForClient = true
+) => buildForClient ? '../../build/client/src' :  '../../build/server';
 
 module.exports = {
     optimization,
@@ -98,5 +100,6 @@ module.exports = {
     cssLoaders,
     babelLoader,
     plugins,
-    getPathForWebpack
+    getPathForContext,
+    getPathForOutput
 }
